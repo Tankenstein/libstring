@@ -77,6 +77,44 @@ String *String_add(String *original, String *addString) {
 	return newString;
 }
 
+String **String_split(String *original, const char *separator) {
+	int sepLength = strlen(separator);
+	String **stringList = (String **)malloc(sizeof(String *));
+	int listElement = 0, tmpSplitElements = 0;
+	char *tmpSplit = (char *)malloc(sizeof(char));
+	for (int i = 0; i < original->length; i++) {
+		char *currentChar = currentChar = &original->content[i];
+		if (*currentChar == separator[0]) {
+			int sepCounter = 1;
+			char checkNextChar = *(currentChar + sepCounter);
+			while (i + sepCounter < original->length
+					&& sepCounter < sepLength
+					&& checkNextChar == separator[sepCounter]) {
+				sepCounter++;
+			}
+			if (sepCounter == sepLength) {
+				stringList = (String **)realloc(stringList, sizeof(stringList) + sizeof(String *));
+				stringList[listElement++] = String_new(tmpSplit);
+				tmpSplit = (char *)malloc(sizeof(char));
+				tmpSplitElements = 0;
+				i += sepLength - 1;
+			}
+		} else {
+			tmpSplit = (char *)realloc(tmpSplit, sizeof(tmpSplit) + sizeof(char));
+			tmpSplit[tmpSplitElements++] = *currentChar;
+		}
+	}
+	if (listElement) {
+		stringList[listElement++] = String_new(tmpSplit);
+	}
+	free(tmpSplit);
+	stringList[listElement] = NULL;
+	if (stringList[0] == NULL) {
+		stringList[0] = original;
+	}
+	return stringList;
+}
+
 void String_print(String *string) {
 	fputs(string->content, stdout);
 }

@@ -28,6 +28,16 @@ int main() {
 
 	String_destroy(temp);
 
+	String *repeated = String_new("wtfplfplwtf");
+
+	String **wtfpl = String_split(repeated, "f");
+	String **pos = wtfpl;
+	while (*pos != NULL) {
+		String_println(*pos++);
+	}
+
+	String_destroy(repeated);
+
 	String *firstPart = String_new("My name is ");
 	String *sum = String_add(firstPart, string);
 	String_destroy(firstPart);
