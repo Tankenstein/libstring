@@ -62,6 +62,11 @@ extern int String_indexOf(String *string, String *search);
 extern String *String_add(String *original, String *addString);
 
 /**
+ *
+ */
+extern String **String_split(String *original, const char *separator);
+
+/**
  * Print a string.
  * @param string The string to print.
  */
