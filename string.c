@@ -78,6 +78,7 @@ String *String_add(String *original, String *addString) {
 }
 
 String **String_split(String *original, const char *separator) {
+	// FIXME: split this fucker out a bit maybe
 	int sepLength = strlen(separator);
 	String **stringList = (String **)malloc(sizeof(String *));
 	int listElement = 0, tmpSplitElements = 0;
