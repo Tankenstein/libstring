@@ -83,7 +83,7 @@ String **String_split(String *original, const char *separator) {
 	int listElement = 0, tmpSplitElements = 0;
 	char *tmpSplit = (char *)malloc(sizeof(char));
 	for (int i = 0; i < original->length; i++) {
-		char *currentChar = currentChar = &original->content[i];
+		char *currentChar = &original->content[i];
 		if (*currentChar == separator[0]) {
 			int sepCounter = 1;
 			char checkNextChar = *(currentChar + sepCounter);
