@@ -27,8 +27,8 @@ void String_destroy(String *string) {
 
 void String_setContent(String *string, const char *content) {
 	int length = strlen(content);
-	void *ptr = realloc(string, sizeof(char) * length);
-	if (ptr == NULL) {
+	string->content = (char *) realloc(string->content, sizeof(char) * length);
+	if (string->content == NULL) {
 		// FIXME: alert user somehow
 	}
 	strcpy(string->content, content);
@@ -78,24 +78,23 @@ String *String_add(String *original, String *addString) {
 }
 
 String *String_slice(String *string, int start, int end, int step) {
-	int actualLength = 0;
-	char *temp = (char *) malloc(sizeof(char) * string->length);
+	int tempIndex = 0;
+	char *temp = (char *) malloc(sizeof(char) * string->length + 1);
 	if (temp == NULL) {
 		return NULL;
 	}
 	if (end < 0) {
-		end = string->length + end + 1;
+		end = (end % string->length) + string->length + 1;
 	}
-	for (int i = start, tempIndex = 0; i < end; i += step, tempIndex++) {
+	for (int i = start; i < end; i += step, tempIndex++) {
 		temp[tempIndex] = string->content[i];
-		actualLength++;
 	}
-	void *ptr = realloc(temp, actualLength);
-	if (ptr == NULL) {
+	temp[tempIndex] = '\0';
+	temp = (char *) realloc(temp, tempIndex + 1);
+	if (temp == NULL) {
 		return NULL;
 	}
-	String *sliced = String_new("");
-	String_setContent(sliced, temp);
+	String *sliced = String_new(temp);
 	free(temp);
 	return sliced;
 }
