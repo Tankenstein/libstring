@@ -48,7 +48,18 @@ bool String_equals(String *first, String *second) {
 }
 
 int String_indexOf(String *string, String *search) {
-	// TODO: implement
+	// FIXME: use Knuth-Morris-Pratt algorithm instead of naive linear search
+	for (int i = 0; i < string->length - search->length; i++) {
+		if (string->content[i] == search->content[0]) {
+			for (int j = 0; j < search->length && i + j < string->length; j++) {
+				if (string->content[i + j] != search->content[j]) {
+					break;
+				} else if (j == search->length - 1) {
+					return i;
+				}
+			}
+		}
+	}
 	return -1;
 }
 

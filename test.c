@@ -31,9 +31,23 @@ int main() {
 	String *firstPart = String_new("My name is ");
 	String *sum = String_add(firstPart, string);
 	String_destroy(firstPart);
-	String_destroy(string);
 
 	String_println(sum);
 	String_destroy(sum);
+
+	String_setContent(string, "abcdeefgh");
+	String *searchable = String_new("dee");
+	String *unSearchable = String_new("hg");
+	String *unSearchableBig = String_new("abaowijdaoiwjd");
+
+	printf("Index is %d (should be 3)\n", String_indexOf(string, searchable));
+	printf("Index is %d (should be -1)\n", String_indexOf(string, unSearchable));
+	printf("Index is %d (should be -1)\n", String_indexOf(string, unSearchableBig));
+
+	String_destroy(searchable);
+	String_destroy(unSearchable);
+	String_destroy(unSearchableBig);
+
+	String_destroy(string);
 	return 0;
 }
