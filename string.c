@@ -27,7 +27,7 @@ void String_destroy(String *string) {
 
 void String_setContent(String *string, const char *content) {
 	int length = strlen(content);
-	void *ptr = realloc(string, length);
+	void *ptr = realloc(string, sizeof(char) * length);
 	if (ptr == NULL) {
 		// FIXME: alert user somehow
 	}
@@ -65,7 +65,7 @@ int String_indexOf(String *string, String *search) {
 
 String *String_add(String *original, String *addString) {
 	int tempCounter = 0;
-	char *temp = malloc(sizeof(char) * (original->length + addString->length));
+	char *temp = (char *) malloc(sizeof(char) * (original->length + addString->length));
 	for (int i = 0; i < original->length; i++, tempCounter++) {
 		temp[tempCounter] = original->content[i];
 	}
