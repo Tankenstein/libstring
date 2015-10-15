@@ -58,6 +58,12 @@ int main() {
 	String_destroy(unSearchable);
 	String_destroy(unSearchableBig);
 
+	String_setContent(string, "grehtk zroelkat");
+
+	String *sliced = String_slice(string, 0, -1, 2);
+	String_println(sliced);
+	String_destroy(sliced);
+
 	String_destroy(string);
 	return 0;
 }

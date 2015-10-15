@@ -62,6 +62,16 @@ extern int String_indexOf(String *string, String *search);
 extern String *String_add(String *original, String *addString);
 
 /**
+ * Slice a string into another string.
+ * @param  string String to slice.
+ * @param  start  Start slice index.
+ * @param  end   	End slice index. If negative, will count from end.
+ * @param  step   Step to slice with.
+ * @return        New sliced string.
+ */
+extern String *String_slice(String *string, int start, int end, int step);
+
+/**
  * Return an array of strings, split by separator string.
  * @param  original  String to split.
  * @param  separator String to split with.

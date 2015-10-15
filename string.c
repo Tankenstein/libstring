@@ -77,6 +77,30 @@ String *String_add(String *original, String *addString) {
 	return newString;
 }
 
+String *String_slice(String *string, int start, int end, int step) {
+	// TODO: implement
+	int actualLength = 0;
+	char *temp = (char *) malloc(sizeof(char) * string->length);
+	if (temp == NULL) {
+		return NULL;
+	}
+	if (end < 0) {
+		end = string->length + end + 1;
+	}
+	for (int i = start, tempIndex = 0; i < end; i += step, tempIndex++) {
+		temp[tempIndex] = string->content[i];
+		actualLength++;
+	}
+	void *ptr = realloc(temp, actualLength);
+	if (ptr == NULL) {
+		return NULL;
+	}
+	String *sliced = String_new("");
+	String_setContent(sliced, temp);
+	free(temp);
+	return sliced;
+}
+
 String **String_split(String *original, const char *separator) {
 	// FIXME: split this fucker out a bit maybe
 	int sepLength = strlen(separator);
