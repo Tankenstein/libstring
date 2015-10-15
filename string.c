@@ -78,7 +78,6 @@ String *String_add(String *original, String *addString) {
 }
 
 String *String_slice(String *string, int start, int end, int step) {
-	// TODO: implement
 	int actualLength = 0;
 	char *temp = (char *) malloc(sizeof(char) * string->length);
 	if (temp == NULL) {
