@@ -62,7 +62,10 @@ extern int String_indexOf(String *string, String *search);
 extern String *String_add(String *original, String *addString);
 
 /**
- *
+ * Return an array of strings, split by separator string.
+ * @param  original  String to split.
+ * @param  separator String to split with.
+ * @return An array of strings.
  */
 extern String **String_split(String *original, const char *separator);
 
