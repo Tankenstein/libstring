@@ -63,7 +63,7 @@ int String_indexOf(String *string, String *search) {
 	return -1;
 }
 
-String *String_add(String *original, String *addString) {
+String *String_add(String *sum, String *original, String *addString) {
 	int tempCounter = 0;
 	char *temp = (char *) malloc(sizeof(char) * (original->length + addString->length));
 	for (int i = 0; i < original->length; i++, tempCounter++) {
@@ -72,12 +72,12 @@ String *String_add(String *original, String *addString) {
 	for (int i = 0; i < addString->length; i++, tempCounter++) {
 		temp[tempCounter] = addString->content[i];
 	}
-	String *newString = String_new(temp);
+	String_setContent(sum, temp);
 	free(temp);
-	return newString;
+	return sum;
 }
 
-String *String_slice(String *string, int start, int end, int step) {
+String *String_slice(String *sliced, String *string, int start, int end, int step) {
 	int tempIndex = 0;
 	char *temp = (char *) malloc(sizeof(char) * string->length + 1);
 	if (temp == NULL) {
@@ -94,13 +94,14 @@ String *String_slice(String *string, int start, int end, int step) {
 	if (temp == NULL) {
 		return NULL;
 	}
-	String *sliced = String_new(temp);
+	String_setContent(sliced, temp);
 	free(temp);
 	return sliced;
 }
 
 String **String_split(String *original, const char *separator) {
 	// FIXME: split this fucker out a bit maybe
+	// TODO: leave allocation up to user.
 	int sepLength = strlen(separator);
 	String **stringList = (String **)malloc(sizeof(String *));
 	int listElement = 0, tmpSplitElements = 0;

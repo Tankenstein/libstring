@@ -4,65 +4,49 @@
 #include <stdio.h>
 
 #include "string.h"
+#include "stringpile.h"
 
 int main() {
+	StringPile *pile = StringPile_new();
 	String *string = String_new("Hwhadup");
 	String_println(string);
 
-	String *temp = String_new("Hwhadup");
-
-	if (String_equals(string, temp)) {
+	if (String_equals(string, SPString_new(pile, "Hwhadup"))) {
 		puts("They are equal!");
 	} else {
 		puts("They are not equal!");
 	}
 
-	String_setContent(string, "Erlich Bachmann");
-	String_println(string);
+	StringPile_burn(pile);
 
-	if (String_equals(string, temp)) {
-		puts("They are equal!");
-	} else {
-		puts("They are not equal!");
-	}
-
-	String_destroy(temp);
-
-	String *repeated = String_new("wtfplfplwtf");
-
-	String **wtfpl = String_split(repeated, "f");
+	String **wtfpl = String_split(SPString_new(pile, "wtfplfplwtf"), "f");
 	String **pos = wtfpl;
 	while (*pos != NULL) {
 		String_println(*pos++);
 	}
 
-	String_destroy(repeated);
+	StringPile_burn(pile);
 
-	String *firstPart = String_new("My name is ");
-	String *sum = String_add(firstPart, string);
-	String_destroy(firstPart);
+	String *sum = String_new("");
+	String_add(sum, SPString_new(pile, "My name is "), string);
+	StringPile_burn(pile);
 
 	String_println(sum);
 	String_destroy(sum);
 
 	String_setContent(string, "abcdeefgh");
-	String *searchable = String_new("dee");
-	String *unSearchable = String_new("hg");
-	String *unSearchableBig = String_new("abaowijdaoiwjd");
 
-	printf("Index is %d (should be 3)\n", String_indexOf(string, searchable));
-	printf("Index is %d (should be -1)\n", String_indexOf(string, unSearchable));
-	printf("Index is %d (should be -1)\n", String_indexOf(string, unSearchableBig));
+	printf("Index is %d (should be 3)\n", String_indexOf(string, SPString_new(pile, "dee")));
+	printf("Index is %d (should be -1)\n", String_indexOf(string, SPString_new(pile, "hg")));
+	printf("Index is %d (should be -1)\n", String_indexOf(string, SPString_new(pile, "abaowijdaoiwjd")));
 
-	String_destroy(searchable);
-	String_destroy(unSearchable);
-	String_destroy(unSearchableBig);
+	StringPile_burn(pile);
 
 	String_setContent(string, "grehtk zroelkat");
 
-	String *sliced = String_slice(string, 0, -1, 2);
+	String *sliced = String_slice(SPString_new(pile, ""), string, 0, -1, 2);
 	String_println(sliced);
-	String_destroy(sliced);
+	StringPile_burn(pile);
 
 	String_destroy(string);
 	return 0;

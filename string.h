@@ -54,22 +54,24 @@ extern bool String_equals(String *first, String *second);
 extern int String_indexOf(String *string, String *search);
 
 /**
- * Add two strings together, returning a new string.
+ * Add two strings together.
+ * @param  sum   		 String to store the sum in.
  * @param  original  String to add to.
  * @param  addString The string to add.
- * @return New string, the sum of the two strings.
+ * @return           Pointer to sum string for convenience.
  */
-extern String *String_add(String *original, String *addString);
+extern String *String_add(String *sum, String *original, String *addString);
 
 /**
  * Slice a string into another string.
+ * @param  sliced String to store the slice in.
  * @param  string String to slice.
  * @param  start  Start slice index.
  * @param  end   	End slice index. If negative, will count from end.
  * @param  step   Step to slice with.
- * @return        New sliced string.
+ * @return        Pointer to sliced string for convenience
  */
-extern String *String_slice(String *string, int start, int end, int step);
+extern String *String_slice(String *sliced, String *string, int start, int end, int step);
 
 /**
  * Return an array of strings, split by separator string.
