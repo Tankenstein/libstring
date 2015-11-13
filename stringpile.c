@@ -4,7 +4,7 @@
 #include "string.h"
 
 StringPile *StringPile_new() {
-  StringPile *pile = (StringPile *) malloc(sizeof(StringPile) * __STRINGPILE_STARTING_SIZE);
+  StringPile *pile = (StringPile *) malloc(sizeof(StringPile));
   if (pile == NULL) {
     return NULL;
   }
