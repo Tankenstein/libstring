@@ -67,14 +67,26 @@ extern String *String_add(String *sum, String *original, String *addString);
  * @param  sliced String to store the slice in.
  * @param  string String to slice.
  * @param  start  Start slice index.
- * @param  end   	End slice index. If negative, will count from end.
+ * @param  end    End slice index. If negative, will count from end.
  * @param  step   Step to slice with.
  * @return        Pointer to sliced string for convenience
  */
 extern String *String_slice(String *sliced, String *string, int start, int end, int step);
 
 /**
+ * TODO: implement
+ * Replace a part of a string with another string.
+ * @param  replaced    String to store the replaced string in.
+ * @param  original    String to replace in.
+ * @param  replacePart String to replace in original.
+ * @param  newPart     String to replace with replacePart with.
+ * @return             Pointer to replaced string for convenience.
+ */
+extern String *String_replace(String *replaced, String *original, String *replacePart, String *newPart);
+
+/**
  * Return an array of strings, split by separator string.
+ *
  * @param  original  String to split.
  * @param  separator String to split with.
  * @return An array of strings.

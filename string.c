@@ -99,6 +99,11 @@ String *String_slice(String *sliced, String *string, int start, int end, int ste
 	return sliced;
 }
 
+String *String_replace(String *replaced, String *original, String *replacePart, String *newPart) {
+	// TODO: implement
+	return replaced;
+}
+
 String **String_split(String *original, const char *separator) {
 	// FIXME: split this fucker out a bit maybe
 	// TODO: leave allocation up to user.

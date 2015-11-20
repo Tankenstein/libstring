@@ -48,6 +48,13 @@ int main() {
 	String_println(sliced);
 	StringPile_burn(pile);
 
+	String_setContent(string, "thAAcA AAcA sparta!");
+	
+	String *replaced = SPString_new(pile, "");
+	String_replace(replaced, string, SPString_new(pile, "AAcA"), SPString_new(pile, "is"));
+	String_println(replaced);
+	StringPile_burn(pile);
+
 	String_destroy(string);
 	return 0;
 }
